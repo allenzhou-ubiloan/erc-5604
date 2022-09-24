@@ -21,7 +21,11 @@ abstract contract ERC5604 is ERC721, IERC5604 {
     /**
      * @dev See {IERC5604-addLienHolder}.
      */
-    function addLienHolder(uint256 tokenId, address holder, bytes calldata extraParams) public virtual override(IERC165, ERC721) {
+    function addLienHolder(
+        uint256 tokenId, 
+        address holder, 
+        bytes calldata extraParams
+    ) public virtual override(IERC165, ERC721) {
         require(_isApprovedOrOwner(_msgSender(), tokenId), "ERC5604: caller is not token owner or approved");
         require(_tokenLienHolders[tokenId] == address(0), "ERC5604: token lien holder existed");
         require(holder != address(0), "ERC5604: add lien to address(0)");
@@ -34,7 +38,11 @@ abstract contract ERC5604 is ERC721, IERC5604 {
     /**
      * @dev See {IERC5604-removeLienHolder}.
      */
-    function removeLienHolder(uint256 tokenId, address holder, bytes calldata extraParams) public virtual override(IERC165, ERC721) {
+    function removeLienHolder(
+        uint256 tokenId, 
+        address holder, 
+        bytes calldata extraParams
+    ) public virtual override(IERC165, ERC721) {
         require(_tokenLienHolders[tokenId] == _msgSender(), "ERC5604: caller is not token lien holder");
 
         delete _tokenLienHolders[tokenId];
@@ -45,7 +53,11 @@ abstract contract ERC5604 is ERC721, IERC5604 {
     /**
      * @dev See {IERC5604-hasLien}.
      */
-    function hasLien(uint256 tokenId, address holder, bytes calldata extraParams) public view virtual override returns (bool) {
+    function hasLien(
+        uint256 tokenId, 
+        address holder, 
+        bytes calldata extraParams
+    ) public view virtual override returns (bool) {
         return _lienHolderOf(tokenId) == holder;
     }
 
