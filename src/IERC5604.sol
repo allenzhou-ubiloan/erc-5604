@@ -1,10 +1,7 @@
-// SPDX-License-Identifier: CC0-1.0
-pragma solidity ^0.8.0;
+// SPDX-License-Identifier: agpl-3.0
+pragma solidity 0.8.17;
 
-import "openzeppelin-contracts/contracts/token/ERC721/IERC721.sol";
-
-/// @author Allen Zhou
-interface IERC5604 is IERC721 {
+interface IERC5604 {
 
     /// === Events ===
 
@@ -12,13 +9,13 @@ interface IERC5604 is IERC721 {
     /// @param tokenId the token a lien is placed on.
     /// @param holder the holder of the lien.
     /// @param extraParams of the original request to add the lien.
-    event OnLienPlaced(uint256 tokenId, address holder, bytes calldata extraParams);
+    event OnLienPlaced(uint256 tokenId, address holder, bytes extraParams);
 
     /// @notice MUST be emitted when an existing lien is successfully removed.
     /// @param tokenId the token a lien was removed from.
     /// @param holder the holder of the lien.
     /// @param extraParams of the original request to remove the lien.
-    event OnLienRemoved(uint256 tokenId, address holder, bytes calldata extraParams);
+    event OnLienRemoved(uint256 tokenId, address holder, bytes extraParams);
 
     /// === CRUD ===
 
@@ -39,7 +36,5 @@ interface IERC5604 is IERC721 {
     /// @notice The method to query if an active lien exists on a token.
     ///         it MUST throw an error if the tokenId doesn't exist or is not owned.
     /// @param tokenId the token a lien is being queried for
-    /// @param holder the holder about whom the method is querying about lien holding.
-    /// @param extraParams extra data for future extension.
-    function hasLien(uint256 tokenId, address holder, bytes calldata extraParams) external view returns (bool);
+    function hasLien(uint256 tokenId) external view returns (bool);
 }
